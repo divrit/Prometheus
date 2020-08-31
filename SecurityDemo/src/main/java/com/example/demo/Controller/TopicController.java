@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.BusinessLogic.TopicsService;
 import com.example.demo.Model.Topics;
 
+import io.micrometer.core.annotation.Timed;
+
 //@Controller
 //@ResponseBody
 @RestController
@@ -27,6 +29,12 @@ public class TopicController {
 	@Autowired
 	private TopicsService BusinessLogic;
 
+	@Timed(
+			value = "divrit.getAllTopics",
+			histogram = true
+			
+			)
+	
 	@GetMapping
 	public List<Topics> getAll() {
 		return BusinessLogic.getAll();

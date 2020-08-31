@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.BusinessLogic.CourseService;
 import com.example.demo.Model.Course;
 
+import io.micrometer.core.annotation.Timed;
+
 @Controller
 @ResponseBody
 @RequestMapping("/course")
@@ -24,12 +26,12 @@ public class CourseController {
 	@Autowired
 	private CourseService  service;
 	
-	
-	@GetMapping("/topic/{id}")
-	public List<Course> getByTopic(@PathVariable int id){
-		return service.findByTopicId(id);
-	}
-	
+
+	@Timed(
+			value="Divrit.getListOfCourses",
+			histogram = true
+			
+			)
 	@GetMapping
 	 public List<Course> getAll() {
 	return service.getAll();
@@ -42,8 +44,9 @@ public class CourseController {
 	}
 	
 	@PutMapping("/{id}")
-	public void update(@RequestBody Course course) {
-		 service.send(course);
+	public void update(@RequestBody Course course, @PathVariable int id) {
+		course.setId(id);
+		 service.update(course);
 	}
 	
 	@DeleteMapping("/{id}")

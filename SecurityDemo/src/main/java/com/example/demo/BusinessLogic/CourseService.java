@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Model.Course;
+import com.example.demo.Model.Topics;
 import com.example.demo.Repository.CourseRespository;
 
 @Service
@@ -34,11 +35,21 @@ public class CourseService {
 	}
 
 	public void send(Course course) {
+	
 		repo.save(course);
 	}
 
 	public void delete(int id) {
 		repo.deleteById(id);
+	}
+
+	public void update(Course course) {
+//	Topics topics=new Topics();
+//	topics.setId(course.getTopics().getId());    //getting id to be updated and putting in new instace of topic
+//	course.setTopics(topics);                      //  updating topic of course object to be saved
+	repo.save(course);
+	
+		
 	}
 	
 	

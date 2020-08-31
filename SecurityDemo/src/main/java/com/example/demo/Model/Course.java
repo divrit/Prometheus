@@ -1,12 +1,15 @@
-package com.example.demo.Model;
+	package com.example.demo.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Course {
 	
 	@javax.persistence.Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	private String Name;
 	private String Description;

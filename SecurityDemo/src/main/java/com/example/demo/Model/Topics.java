@@ -1,16 +1,25 @@
 package com.example.demo.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 @Entity
 public class Topics {
     
 	@javax.persistence.Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String Name;
-	private String Any;
+	private String Review;
 	
 	
+	public String getReview() {
+		return Review;
+	}
+	public void setReview(String review) {
+		Review = review;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -23,17 +32,12 @@ public class Topics {
 	public void setName(String name) {
 		Name = name;
 	}
-	public String getAny() {
-		return Any;
-	}
-	public void setAny(String any) {
-		Any = any;
-	}
+	
 	public Topics(Integer id, String name, String any) {
 		super();
 		this.id = id;
 		Name = name;
-		Any = any;
+		Review = any;
 	}
 	public Topics() {
 		super();
